@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+  <title>Adventure Cycles</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Script -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src="js/products.js"></script>
+
+  <!-- Bootstrap CSS -->
+
+  <link rel="stylesheet" href="css/Footer.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+  <!-- template quantity -->
+  <script id="quantityTemplate" type="text/template">
+      <p><strong><%= quantity %></strong></p>
+  </script>
+
+  <!-- template price -->
+  <script id="priceTemplate" type="text/template">
+      <p><strong><%= price %>.-</strong></p>
+  </script>
+
+  <!-- new bike template -->
+  <script id="cartBikeTemplate" type="text/template">
+        <div class="media">
+          <a class="thumbnail pull-left" href="#"> <img class="media-object" src="<%= image %>" style="width: 110px; height: 72px;"> </a>
+          <div class="media-body">
+            <h5 class="media-heading"><a href="#"><%= name %></a></h5>
+            <h6 class="media-heading"> by <a href="#"><%= brand %></a></h6>
+            <span>Status: </span><span class="text-success"><%= stock %></span>
+          </div>
+        </div>
+  </script>
+
+</head>
+
+<body>
+
+  <!--Header-->
+  <header>
+
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+    <img src="bilder/logo_grey.png" width="284" height="80" alt="">
+  </a>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Fahrräder</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Über uns
+          </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something</a>
+              </div>
+            </li>
+          </ul>
+
+
+        </div>
+      </nav>
+
+  </header>
+
+  <!-- Einfügen Content -->
+  <!-- Platzhalter-->
+  <div class="row form-group"></div>
+  <div class="row form-group"></div>
+  <div class="row form-group"></div>
+  <!-- Platzhalter-->
+  <!-- Rechnungsadresse -->
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <h3 class="panel-title display-td">Rechnungsadresse</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <label for="name">NAME</label>
+          <input type="text" class="form-control" name="name" placeholder="Name" required autofocus/>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="surname">VORNAME</label>
+          <input type="text" class="form-control" name="surname" placeholder="Vorname" required autofocus/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <div class="form-group">
+          <label for="nstreet">ADRESSE</label>
+          <input type="text" class="form-control" name="street" placeholder="Strassenname" required autofocus/>
+        </div>
+      </div>
+      <div class="col-1">
+        <div class="form-group">
+          <label for="streetnumber">NUMMER</label>
+          <input type="tel" class="form-control" name="streetnumber" placeholder="Nr." required autofocus/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="city">ORT</label>
+          <input type="text" class="form-control" name="city" placeholder="Ort" required autofocus/>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label for="plz">PLZ</label>
+          <input type="tel" class="form-control" name="plz" placeholder="PLZ" required autofocus/>
+        </div>
+      </div>
+    </div>
+    <!-- Platzhalter-->
+    <div class="row form-group"></div>
+    <!-- Platzhalter-->
+
+    <div class="row">
+      <div class="col-4">
+        <label for="country">LAND</label>
+        <select name="country" id="country">
+      <option value="0" label="Select a country … " selected="selected">Bitte wählen… </option>
+      <optgroup id="country-optgroup-Europe" label="Europa">
+        <option value="AT" label="Austria">Österreich</option>
+        <option value="DE" label="Germany">Deutschand</option>
+        <option value="CH" label="Switzerland">Schweiz</option>
+      </optgroup>
+      </select>
+      </div>
+    </div>
+    <!-- Platzhalter-->
+    <div class="row form-group"></div>
+    <!-- Platzhalter-->
+    <div class="row">
+      <div class="col-6">
+        <label for="mail">MAIL ADRESSE</label>
+        <div class="input-group">
+          <input type="mail" class="form-control" name="mail" placeholder="Mail Adresse" required autofocus/>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group"></div>
+    <div class="row">
+      <div class="col-6">
+        <label for="phone">TELEFONNUMMER</label>
+        <div class="input-group">
+          <input type="tel" class="form-control" name="phone" placeholder="Telefonnummer" required autofocus/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Platzhalter-->
+  <div class="row form-group"></div>
+  <div class="row form-group"></div>
+  <div class="row form-group"></div>
+  <!-- Platzhalter-->
+
+  <!-- new Warenkorb-->
+
+  <div class="container">
+    <h2>Warenkorbdetails</h2>
+    <p>Bitte überprüfen Sie nochmals Ihre Produkte:</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Produkt</th>
+            <th>Anzahl</th>
+            <th>Preis</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div id="buycityBike1"></div></td>
+            <td><div id="quantitycityBike1"></div></td>
+            <td><div id="pricecityBike1"></td>
+            <td><strong>500.-</strong></td>
+          </tr>
+          <tr>
+            <td><div id="buycityBike2"></div></td>
+            <td><div id="quantitycityBike2"></div></td>
+            <td><div id="pricecityBike2"></td>
+            <td><strong>650.-</strong></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><strong>Subtotal:</strong></td>
+            <td><strong>1150.-</strong></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><strong>Versandkosten:</strong></td>
+            <td><strong>50.-</strong></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><h4><strong>Total:</strong></h4></td>
+            <td><h4><strong>1200.-</strong></h4></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+  <!-- Platzhalter-->
+  <div class="row form-group"></div>
+  <!-- Platzhalter-->
+
+  <!-- Zahlungsinformationen-->
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <h3 class="panel-title display-td">Zahlungsmethode</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <input type="checkbox" name="mastercard" value="mastercard">
+        <img class="img-responsive pull-right" src="bilder/mastercard.png">
+        <input type="checkbox" name="visa" value="visa">
+        <img class="img-responsive pull-right" src="bilder/visa.png">
+        <input type="checkbox" name="paypal" value="paypal">
+        <img class="img-responsive pull-right" src="bilder/paypal.png">
+        <input type="checkbox" name="twint" value="twint">
+        <img class="img-responsive pull-right" src="bilder/twint.jpg">
+      </div>
+    </div>
+    <!-- Platzhalter-->
+    <div class="row form-group"></div>
+    <!-- Platzhalter-->
+    <div class="row">
+      <div class="col-6">
+        <label for="cardNumber">KARTEN NUMMER</label>
+        <div class="input-group">
+          <input type="tel" class="form-control" name="cardNumber" placeholder="Gültige Kartennummer" required autofocus/>
+        </div>
+      </div>
+    </div>
+    <!-- Platzhalter-->
+    <div class="row form-group"></div>
+    <!-- Platzhalter-->
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <label for="cardExpiry">ABLAUFDATUM</label>
+          <input id="month" type="month" class="form-control" name="cardExpiry" placeholder="MM / YY" required autofocus/>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label for="cardCVC">CV NUMMER</label>
+          <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" required autofocus/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="couponCode">GUTSCHEIN CODE</label>
+          <input type="text" class="form-control" name="couponCode" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <input type="checkbox" name="agb" value="agb" required autofocus>
+        <label for="agb">Ich akzeptiere die AGB</label>
+        <button class="btn btn-success btn-lg btn-block" type="submit">Bezahlen</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Platzhalter-->
+  <div class="row form-group"></div>
+  <div class="row form-group"></div>
+  <div class="row form-group"></div>
+  <!-- Platzhalter-->
+
+
+
+  <div class="content">
+  </div>
+  <footer id="myFooter">
+    <div class="container">
+      <ul>
+        <li><a href="#">Standorte</a></li>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">AGBs</a></li>
+      </ul>
+      <p class="footer-copyright">©2017</p>
+    </div>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+
+</html>
